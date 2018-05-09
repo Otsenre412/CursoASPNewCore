@@ -7,9 +7,11 @@ namespace acoplamiento
     {
         static void Main(string[] args)
         {
-            var service = new OrderService(new OrdersRepository());
-            var pedidos = service.GetOrders();
+            IOrdersRepository repository = new OrdersFromAPIRepository();
 
+            var service = new OrdersService(repository);
+
+            var pedidos = service.GetOrders();
             foreach (var pedido in pedidos)
             {
                 Console.WriteLine(pedido);
@@ -17,10 +19,10 @@ namespace acoplamiento
         }
     }
 
-    public class OrderService
+    public class OrdersService
     {
-        OrdersRepository _ordersRepository;
-        public OrderService(OrdersRepository repository)
+        IOrdersRepository _ordersRepository;
+        public OrdersService(IOrdersRepository repository)
         {
             _ordersRepository= repository;
         }
@@ -49,5 +51,10 @@ namespace acoplamiento
 
         return orders;
         }
+    }
+
+    public class OrdersVromAPIRepository : IOrdersRepository
+    {
+        
     }
 }
