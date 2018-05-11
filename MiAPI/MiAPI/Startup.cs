@@ -65,6 +65,8 @@ namespace MiAPI
                 logger.LogInformation(logString);
             });
 
+            app.UseMiddleware<SimpleProfilerMiddelware>();
+
             app.UseMvc();
         }
     }
