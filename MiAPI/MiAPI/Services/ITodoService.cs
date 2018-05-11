@@ -10,5 +10,6 @@ namespace MiAPI.Services
         bool ExistList(int id);
 
         int CreateList(TodoList list);
+        void Updatelist(TodoList list);
     }
 }

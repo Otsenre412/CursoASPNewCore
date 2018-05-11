@@ -50,12 +50,40 @@ namespace MiAPI.Controllers
             {
                 createdId = _service.CreateList(list);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
             return CreatedAtAction("PostTodoList", new { id = createdId }, list);
         }
-    }
-}
+
+        [HttpPut("id: int")]
+                public IActionResult PutTodoList(int id, [FromBody] TodoList list)
+
+                {
+                    if (!ModelState.IsValid || id <= 0)
+                        return BadRequest(ModelState);
+
+                    _service.Updatelist(list);
+
+                    return NoContent();
+                }
+       [HttpDelete("{id: int}")]
+            public IActionResult DeleteTodoList(int id)
+     {
+            if (id <= 0)
+                return BadRequest();
+
+            if (!_service.ExistList(id))
+                return NotFound(new { info = "No existe" });
+
+            _service.DeleteList(id);
+
+            return Ok();
+
+
+     }
+ }
+
+    
