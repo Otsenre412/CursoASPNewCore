@@ -11,5 +11,6 @@ namespace MiAPI.Services
 
         int CreateList(TodoList list);
         void Updatelist(TodoList list);
+        void DeleteList(int id);
     }
 }
